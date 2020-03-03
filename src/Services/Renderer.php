@@ -3,13 +3,10 @@
 
 namespace IsakzhanovR\Ssr\Services;
 
-
-use Facade\FlareClient\Http\Exceptions\NotFound;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use IsakzhanovR\Ssr\Engines\Node;
 use IsakzhanovR\Ssr\Exceptions\NodeErrorException;
-use Psy\Exception\TypeErrorException;
+use IsakzhanovR\Ssr\Exceptions\NodeNotFoundException;
 
 class Renderer
 {
@@ -77,7 +74,7 @@ class Renderer
     protected function applicationScript(): string
     {
         if (!file_exists($this->entry)) {
-            throw new NotFound('Server js file not found', 400);
+            throw new NodeNotFoundException('Server js file not found', 400);
         }
 
         return file_get_contents($this->entry);

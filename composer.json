@@ -1,0 +1,36 @@
+{
+    "name": "isakzhanovr/laravel-ssr",
+    "description": "Packege for rendering JavaScript in Laravel application",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "isakzhanovr",
+            "email": "isakzhanov.r@gmail.com",
+            "homepage": "https://github.com/isakzhanovR/laravel-ssr",
+            "role": "Developer"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7",
+        "symfony/process": "^4.*",
+        "illuminate/support": "^5.5|^6.0|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "IsakzhanovR\\Ssr\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IsakzhanovR\\Ssr\\ServiceProvider"
+            ]
+        }
+    }
+}

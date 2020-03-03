@@ -4,9 +4,7 @@
 namespace IsakzhanovR\Ssr;
 
 
-use Illuminate\Foundation\AliasLoader;
 use IsakzhanovR\Ssr\Engines\Node;
-use IsakzhanovR\Ssr\Facades\Ssr;
 use IsakzhanovR\Ssr\Services\Renderer;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
