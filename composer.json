@@ -1,18 +1,18 @@
 {
-    "name": "isakzhanovR/laravel-ssr",
+    "name": "isakzhanov-r/laravel-ssr",
     "description": "Packege for rendering JavaScript in Laravel application",
     "keywords": ["laravel", "ssr", "server side rendering", "server side rendering node"],
     "type": "library",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/isakzhanovR/laravel-ssr/issues",
-        "source": "https://github.com/isakzhanovR/laravel-ssr"
+        "issues": "https://github.com/isakzhanov-r/laravel-ssr/issues",
+        "source": "https://github.com/isakzhanov-r/laravel-ssr"
     },
     "authors": [
         {
             "name": "isakzhanovr",
             "email": "isakzhanov.r@gmail.com",
-            "homepage": "https://github.com/isakzhanovR/laravel-ssr"
+            "homepage": "https://github.com/isakzhanov-r/laravel-ssr"
         }
     ],
     "require": {
