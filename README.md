@@ -95,3 +95,5 @@ app.$store.commit('SetPosts', {posts: posts});
 
 app.$mount('#wrapper');
 ```
+
+...
