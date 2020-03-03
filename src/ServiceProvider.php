@@ -14,8 +14,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/ssr.php' => \config_path('ssr.php'),
         ], 'config');
-
-        $this->app->alias(Renderer::class, 'ssr');
     }
 
     public function register()
@@ -25,6 +23,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->singleton(Node::class, function () {
             return new Node($this->app->config->get('ssr.temp_storage'));
         });
+
+        $this->app->alias(Renderer::class, 'ssr');
     }
 
     public function provides()
