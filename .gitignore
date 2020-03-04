@@ -3,5 +3,7 @@
 /yarn.lock
 /vendor
 /tests/node_modules
-/tests/.lock
+/tests/*.lock
+/tests/*.log
 /tests/public
+/tests/mix-manifest.json

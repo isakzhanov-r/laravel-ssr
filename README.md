@@ -1,6 +1,38 @@
 ## Server Side Rendering 
 This helper allows you to render the SPA using node js for search bots.
 
+
+## Installation
+
+To get the latest version of Laravel Server Side Rendering package, simply require the project using [Composer](https://getcomposer.org):
+
+```
+composer require isakzhanov-r/laravel-ssr
+```
+
+Instead, you can, of course, manually update the dependency block `require` in `composer.json` and run `composer update` if you want to:
+
+```json
+{
+    "require": {
+        "isakzhanov-r/laravel-ssr": "^1.0"
+    }
+}
+```
+
+If you don't use auto-discovery, add the `ServiceProvider` to the providers array in `config/app.php`:
+
+```php
+IsakzhanovR\Ssr\ServiceProvider::class;
+```
+
+You can also publish the config file to change implementations (ie. interface to specific class):
+
+```
+php artisan vendor:publish --provider="IsakzhanovR\Ssr\ServiceProvider"
+```
+
+
 ## Using
 You will need two files for two scenarios: server and client.
 There is an example of a server script in the `tests` folder
