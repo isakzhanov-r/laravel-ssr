@@ -5,5 +5,4 @@
 /tests/node_modules
 /tests/*.lock
 /tests/*.log
-/tests/public
 /tests/mix-manifest.json

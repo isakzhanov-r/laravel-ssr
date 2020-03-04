@@ -11,7 +11,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->createVueApplication();
     }
 
     protected function getPackageProviders($app)
@@ -26,17 +25,5 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app->config->set('app.debug', true);
-    }
-
-    private function createVueApplication()
-    {
-        $process = new Process(['cd ' . __DIR__ . ' && yarn install && yarn dev']);
-        $process->setTimeout(5000);
-        try {
-            $process->mustRun();
-            echo $process->getOutput();
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
     }
 }
