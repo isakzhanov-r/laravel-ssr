@@ -30,9 +30,8 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
     private function createVueApplication()
     {
-        $process = new Process('cd ' . __DIR__ . ' && yarn install && yarn dev');
+        $process = new Process(['cd ' . __DIR__ . ' && yarn install && yarn dev']);
         $process->setTimeout(5000);
-
         try {
             $process->mustRun();
             echo $process->getOutput();

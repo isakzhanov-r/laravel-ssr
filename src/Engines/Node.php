@@ -25,7 +25,7 @@ class Node
 
     public function nodePath()
     {
-        $process = new Process('which node');
+        $process = new Process(['which', 'node']);
         try {
             $process->mustRun();
             $this->node_path = trim($process->getOutput());
@@ -39,7 +39,7 @@ class Node
         $file_name = $this->createTempFile($serverScript);
         $temp_file = Storage::disk($this->disk)->path($file_name);
 
-        $process = new Process("{$this->node_path} {$temp_file}");
+        $process = new Process([$this->node_path, $temp_file]);
 
         try {
             return $process->mustRun()->getOutput();
