@@ -88,7 +88,7 @@ class Renderer
 
     protected function applicationData()
     {
-        $stringify = sprintf("var url = %s;", json_encode(['url' => request()->getRequestUri()]));
+        $stringify = sprintf("var url = %s;", json_encode(['path' => request()->getRequestUri()]));
         $context   = empty($this->data) ? '{}' : $this->data;
 
         foreach ($context as $key => $value) {

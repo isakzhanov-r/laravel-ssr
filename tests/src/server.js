@@ -40,7 +40,7 @@ const app = new Vue({
     render: h => h(App)
 });
 
-app.$router.push(url);
+app.$router.push(url.path);
 
 app.$store.commit('SetStrings', {strings: strings});
 

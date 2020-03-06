@@ -107,7 +107,7 @@ import renderVueComponentToString from 'vue-server-renderer/basic';
 app.$store.commit('SetNews', {news: news});
 app.$store.commit('SetPosts', {posts: posts});
 
-app.$router.push(url);
+app.$router.push(url.path);
 
 renderVueComponentToString(app, (err, html) => {
     if (err) {

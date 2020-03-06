@@ -25837,7 +25837,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     return h(_vue_Application__WEBPACK_IMPORTED_MODULE_3__["default"]);
   }
 });
-app.$router.push(url);
+app.$router.push(url.path);
 app.$store.commit('SetStrings', {
   strings: strings
 });
