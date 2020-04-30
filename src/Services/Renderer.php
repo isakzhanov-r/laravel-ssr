@@ -101,7 +101,7 @@ class Renderer
 
     protected function appendData(&$result)
     {
-        return $result .= '<script>' . $this->stringify . '</script>';
+        return $result .= '<script type="application/javascript">' . $this->stringify . '</script>';
     }
 
     protected function defaultResult(\Exception $exception)
