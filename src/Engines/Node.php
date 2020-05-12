@@ -25,12 +25,10 @@ class Node
 
     public function nodePath()
     {
-        $process = new Process(['which', 'node']);
-        try {
-            $process->mustRun();
-            $this->node_path = trim($process->getOutput());
-        } catch (\Exception $exception) {
-            throw new NodeNotFoundException($exception->getMessage(), 127);
+        if ($node_path = config('ssr.node_path')) {
+            $this->node_path = $node_path;
+        } else {
+            $this->getNodePath();
         }
     }
 
@@ -49,6 +47,17 @@ class Node
             Storage::disk($this->disk)->delete($file_name);
         }
 
+    }
+
+    protected function getNodePath()
+    {
+        $process = new Process(['type', '-P', 'node']);
+        try {
+            $process->mustRun();
+            $this->node_path = trim($process->getOutput());
+        } catch (\Exception $exception) {
+            throw new NodeNotFoundException($exception->getMessage(), 127);
+        }
     }
 
     protected function createTempFile($serverScript)
