@@ -51,7 +51,7 @@ class Node
 
     protected function getNodePath()
     {
-        $process = new Process(['type', '-P', 'node']);
+        $process = new Process(['which', 'node']);
         try {
             $process->mustRun();
             $this->node_path = trim($process->getOutput());
