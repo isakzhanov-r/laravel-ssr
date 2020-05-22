@@ -52,7 +52,7 @@ class Renderer
         return $this;
     }
 
-    public function render()
+    public function render(bool $appendData = true)
     {
         try {
             $serverScript = implode(';', [
@@ -66,6 +66,9 @@ class Renderer
                 return $this->defaultResult($exception);
             }
             throw new NodeErrorException($exception->getMessage(), $exception->getCode());
+        }
+        if (!$appendData) {
+            return $result;
         }
 
         return $this->appendData($result);
