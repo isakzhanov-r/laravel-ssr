@@ -1,6 +1,7 @@
 /node_modules
 /.idea
 /yarn.lock
+/*.lock
 /vendor
 /tests/node_modules
 /tests/*.lock
