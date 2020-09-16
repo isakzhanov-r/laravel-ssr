@@ -10,7 +10,7 @@ class RenderTest extends TestCase
     public function testRenderJavaScript()
     {
         $strings = $this->getTestData();
-        $result  = ssr()
+        $result = ssr()
             ->entry('js/server.js')
             ->setData(compact('strings'))
             ->render();
@@ -26,16 +26,15 @@ class RenderTest extends TestCase
             ->entry('js/server-broken.js')
             ->setData(compact('strings'))
             ->render();
-
     }
 
     public function testRenderErrorFileOnProduction()
     {
         app()->config->set('app.debug', false);
         $strings = $this->getTestData();
-        $result  = ssr()
+        $result = ssr()
             ->entry('js/server-broken.js')
-            ->fallback('<div class="wrapper" id="wrapper"></div>') #this is mast to render client , if ssr is broken
+            ->fallback('<div class="wrapper" id="wrapper"></div>') //this is mast to render client , if ssr is broken
             ->setData(compact('strings'))
             ->render();
 

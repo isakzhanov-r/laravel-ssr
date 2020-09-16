@@ -1,6 +1,5 @@
 <?php
 
-
 namespace IsakzhanovR\Ssr\Services;
 
 use Illuminate\Support\Facades\Log;
@@ -60,11 +59,12 @@ class Renderer
                 $this->applicationData(),
                 $this->applicationScript(),
             ]);
-            $result       = json_decode($this->node->run($serverScript));
+            $result = json_decode($this->node->run($serverScript));
         } catch (\Exception $exception) {
             if (config('app.debug') === false) {
                 return $this->defaultResult($exception);
             }
+
             throw new NodeErrorException($exception->getMessage(), $exception->getCode());
         }
         if (!$appendData) {
@@ -85,14 +85,14 @@ class Renderer
 
     protected function dispatchScript(): string
     {
-        return "var dispatch = function (result) {
-        return console.log(JSON.stringify(result))}";
+        return 'var dispatch = function (result) {
+        return console.log(JSON.stringify(result))}';
     }
 
     protected function applicationData()
     {
-        $stringify = sprintf("var url = %s;", json_encode(['path' => request()->getRequestUri()]));
-        $context   = empty($this->data) ? [] : $this->data;
+        $stringify = sprintf('var url = %s;', json_encode(['path' => request()->getRequestUri()]));
+        $context = empty($this->data) ? [] : $this->data;
 
         foreach ($context as $key => $value) {
             $stringify .= sprintf("var {$key} = %s; ", json_encode($value));
@@ -104,7 +104,7 @@ class Renderer
 
     protected function appendData(&$result)
     {
-        return $result .= '<script type="application/javascript">' . $this->stringify . '</script>';
+        return $result .= '<script type="application/javascript">'.$this->stringify.'</script>';
     }
 
     protected function defaultResult(\Exception $exception)
