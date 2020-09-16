@@ -1,6 +1,6 @@
 <?php
 
-use \IsakzhanovR\Ssr\Services\Renderer;
+use IsakzhanovR\Ssr\Services\Renderer;
 
 if (!function_exists('ssr')) {
     function ssr(string $entry = null)
@@ -12,4 +12,3 @@ if (!function_exists('ssr')) {
         return app()->make(Renderer::class)->entry($entry);
     }
 }
-

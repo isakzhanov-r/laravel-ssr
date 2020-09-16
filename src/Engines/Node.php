@@ -46,12 +46,12 @@ class Node
         } finally {
             Storage::disk($this->disk)->delete($file_name);
         }
-
     }
 
     protected function getNodePath()
     {
         $process = new Process(['which', 'node']);
+
         try {
             $process->mustRun();
             $this->node_path = trim($process->getOutput());
@@ -62,7 +62,7 @@ class Node
 
     protected function createTempFile($serverScript)
     {
-        $file_name = implode(DIRECTORY_SEPARATOR, [$this->path, md5(intval(microtime(true) * 1000) . random_bytes(5)) . '.js']);
+        $file_name = implode(DIRECTORY_SEPARATOR, [$this->path, md5(intval(microtime(true) * 1000).random_bytes(5)).'.js']);
 
         Storage::disk($this->disk)->put($file_name, $serverScript);
 

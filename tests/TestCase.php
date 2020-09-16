@@ -2,9 +2,7 @@
 
 namespace Tests;
 
-
 use IsakzhanovR\Ssr\ServiceProvider;
-use Symfony\Component\Process\Process;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -16,7 +14,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         $app->bind('path.public', function () {
-            return __DIR__ . '/public';
+            return __DIR__.'/public';
         });
 
         return [ServiceProvider::class];
