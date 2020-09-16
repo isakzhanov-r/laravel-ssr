@@ -1,5 +1,20 @@
-## Server Side Rendering 
+## Server Side Rendering
 This helper allows you to render the SPA using node js for search bots.
+
+<p align="center">
+    <a href="https://packagist.org/packages/isakzhanov-r/laravel-ssr"><img src="https://img.shields.io/packagist/dt/isakzhanov-r/laravel-ssr.svg?style=flat-square" alt="Total Downloads" /></a>
+    <a href="https://packagist.org/packages/isakzhanov-r/laravel-ssr"><img src="https://poser.pugx.org/isakzhanov-r/laravel-ssr/v/stable?format=flat-square" alt="Latest Stable Version" /></a>
+    <a href="https://packagist.org/packages/isakzhanov-r/laravel-ssr"><img src="https://poser.pugx.org/isakzhanov-r/laravel-ssr/v/unstable?format=flat-square" alt="Latest Unstable Version" /></a>
+    <a href="LICENSE"><img src="https://poser.pugx.org/isakzhanov-r/laravel-ssr/license?format=flat-square" alt="License" /></a>
+</p>
+
+## Contents
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [Usage](#usage)
+    * [Methods ](#methods )
+    * [Examples](#examples)
+* [License](#license)
 
 
 ## Installation
@@ -26,14 +41,28 @@ If you don't use auto-discovery, add the `ServiceProvider` to the providers arra
 IsakzhanovR\Ssr\ServiceProvider::class;
 ```
 
-You can also publish the config file to change implementations (ie. interface to specific class):
+## Configuration
+The package is configured to use node, since it is probably already installed on your system.
+If you need to change the configuration file you can publish it for modification (ie. interface to specific class):
 
 ```
 php artisan vendor:publish --provider="IsakzhanovR\Ssr\ServiceProvider"
 ```
 
+The configuration file contains two settings: the path where temporary files will be saved by default `"storage/app/ssr"` and the path to the `node` executable file
 
-## Using
+```php
+return [
+    'temp_storage' => [
+        'disk' => 'local', // filesystem disk
+        'path' => 'ssr',   // directory
+    ],
+    'node_path'    => env('NODE_PATH', ''), // default /usr/bin/node
+];
+```
+You can check on the server where the node is located by running the `which node` command and add the `NODE_PATH` key to the environment file
+
+## Usage
 You will need two files for two scenarios: server and client.
 There is an example of a server script in the `tests` folder
 
@@ -58,16 +87,18 @@ The server script must be passed to the ssr function, and the client script must
     <script src="{{ mix('js/client.js') }}" defer></script>
 @endsection
 ```
-
+###Methods
 The `entry()` method takes the path to the server file argument.js, you can also pass the file path to the `ssr()` method
 ```blade
-{!! ssr('js/server.js') !!}  ===  {!! ssr()->entry('js/server.js') !!} 
+{!! ssr('js/server.js') !!}  ===  {!! ssr()->entry('js/server.js') !!}
 ```
 
 The `fallback()` method is required if there are errors in the production process during rendering, this method will return the div to which the client application will be mounted.
 
 The `setData()` method is required for transferring data to the server.js takes an array as an argument.
 
+The `render ()` method renders html from a js file
+###Examples
 Example index blade
 ```blade
 <html>
@@ -76,10 +107,10 @@ Example index blade
         <script defer src="{{ mix('client.js') }}">
     </head>
     <body>
-        {!! 
+        {!!
         ssr(mix('server.js'))
         ->setData(compact('news','posts'))
-        ->render() 
+        ->render()
         !!}
     </body>
 </html>
@@ -128,4 +159,7 @@ app.$store.commit('SetPosts', {posts: posts});
 app.$mount('#wrapper');
 ```
 
-...
+Try to include all plugins and packages that can use the `window` object in the `client.js` file because when rendering the server file, `node` will not find the `window object` and will return an error.
+
+##License
+This package is released under the [MIT License](LICENSE.md).
