@@ -2,6 +2,7 @@
 
 namespace IsakzhanovR\Ssr\Services;
 
+use Exception;
 use Illuminate\Support\Facades\Log;
 use IsakzhanovR\Ssr\Engines\Node;
 use IsakzhanovR\Ssr\Exceptions\NodeErrorException;
@@ -9,21 +10,20 @@ use IsakzhanovR\Ssr\Exceptions\NodeNotFoundException;
 
 class Renderer
 {
-    protected $node;
+    protected array $data = [];
 
-    protected $data = [];
+    protected array $env = [];
 
-    protected $env = [];
-
-    protected $fallback = '';
+    protected string $fallback = '';
 
     protected $entry;
 
     protected $stringify;
 
-    public function __construct(Node $node)
+    public function __construct(
+        protected Node $node
+    )
     {
-        $this->node = $node;
     }
 
     public function entry(string $file_path)
@@ -59,8 +59,8 @@ class Renderer
                 $this->applicationData(),
                 $this->applicationScript(),
             ]);
-            $result = json_decode($this->node->run($serverScript));
-        } catch (\Exception $exception) {
+            $result       = json_decode($this->node->run($serverScript));
+        } catch (Exception $exception) {
             if (config('app.debug') === false) {
                 return $this->defaultResult($exception);
             }
@@ -92,7 +92,7 @@ class Renderer
     protected function applicationData()
     {
         $stringify = sprintf('var url = %s;', json_encode(['path' => request()->getRequestUri()]));
-        $context = empty($this->data) ? [] : $this->data;
+        $context   = empty($this->data) ? [] : $this->data;
 
         foreach ($context as $key => $value) {
             $stringify .= sprintf("var {$key} = %s; ", json_encode($value));
@@ -104,10 +104,10 @@ class Renderer
 
     protected function appendData(&$result)
     {
-        return $result .= '<script type="application/javascript">'.$this->stringify.'</script>';
+        return $result .= '<script type="application/javascript">' . $this->stringify . '</script>';
     }
 
-    protected function defaultResult(\Exception $exception)
+    protected function defaultResult(Exception $exception)
     {
         Log::debug($exception->getMessage());
 
