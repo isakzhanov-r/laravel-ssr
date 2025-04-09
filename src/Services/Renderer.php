@@ -109,8 +109,6 @@ class Renderer
 
     protected function defaultResult(Exception $exception)
     {
-        Log::debug($exception->getMessage());
-
         return $this->appendData($this->fallback);
     }
 }
